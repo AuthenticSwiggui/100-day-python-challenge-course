@@ -1,4 +1,4 @@
-from game_data import game_data
+from final_beginner_projects.game_data import game_data
 import random
 
 #TODO 1: Initialize the game: load 2 random terms -> accepts input choice -> compare both terms -> calcu
