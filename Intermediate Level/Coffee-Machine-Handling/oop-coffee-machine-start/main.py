@@ -8,10 +8,9 @@ money_handler = MoneyMachine()
 user_choice = ""
 
 def brewing_coffee(choice) -> None:
-    if not coffee_maker_handler.is_resource_sufficient(choice):
-        return
-    if money_handler.make_payment(choice.cost):
+    if money_handler.make_payment(choice.cost) and coffee_maker_handler.is_resource_sufficient(choice):
         coffee_maker_handler.make_coffee(choice)
+    return
     
 def coffee_machine():
     while True:
