@@ -55,6 +55,5 @@ class Snake():
         for tail_num in range(len(self.snake_tails) -1, 0, -1):
             new_pos = self.snake_tails[tail_num-1].pos()
             self.snake_tails[tail_num].goto(new_pos)
-            
         self.snake_head.forward(MOVE_DISTANCE)
         

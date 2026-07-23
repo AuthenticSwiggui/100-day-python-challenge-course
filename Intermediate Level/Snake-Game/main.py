@@ -1,10 +1,14 @@
 from turtle import Screen
 import time
 from snake import Snake
+from food import Food
+from scoreboard import Scoreboard
 
 BG_PATH = "Intermediate Level/Snake-Game/source/bgkusuriya.png"
 
 snake = Snake()
+food = Food()
+scoreboard = Scoreboard()
 screen = Screen()
 
 game_running = True
@@ -27,10 +31,27 @@ def key_mapping() -> None:
     screen.onkey(key="Right", fun=snake.move_right)
     
 def move_snake() -> None:
+    game_running = True
     while game_running:
         screen.update()
         time.sleep(0.1)
         snake.move()
+        if snake.snake_head.distance(food) <= 15:
+            food.place_food()
+            snake.add_tail()
+            scoreboard.add_point()
+        x = snake.snake_head.xcor()
+        y = snake.snake_head.ycor()
+
+        if not (-300 <= x <= 280) or not (-280 <= y <= 280):
+            game_running = False
+            scoreboard.game_over()
+
+        for tail in snake.snake_tails[1:]:
+            if snake.snake_head.distance(tail) < 10:
+                    game_running = False
+                    scoreboard.game_over()
+
 
 def main() -> None:
     screen_setup()      
